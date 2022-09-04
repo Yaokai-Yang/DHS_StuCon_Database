@@ -56,14 +56,20 @@
                 
                 //Info
                 let info = document.createElement("p");
-                info.innerText = contention.Info;
+                info.innerHTML = contention.Info.replace(/&lt;/g, '<').replace(/&gt;/g, '>') ;
                 result.appendChild(info);
 
                 //Source
                 let sources = document.createElement("ul");
                 contention.Sources.forEach((source)=>{
+                    var date = source.Date;
+                    if (date == null)
+                    {
+                        date = "NO DATE";
+                    }
+
                     let li = document.createElement("li");
-                    li.innerHTML = '<a href="' + source.Link + '" target="_blank""><i>' + source.Publisher + '</i>, ' + source.Date + '</a>';
+                    li.innerHTML = '<a href="' + source.Link + '" target="_blank""><i>' + source.Publisher + '</i>, ' + date + '</a>';
                     sources.appendChild(li);
                 })
                 result.appendChild(sources);
